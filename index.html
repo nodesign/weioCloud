@@ -10,7 +10,7 @@
 
     <body lang="en">
     <h1>SockJS Echo example</h1>
-    <button type="button" class="btn btn-primary btn-lg">Primary</button>
+    <button id="btnTest" type="button" class="btn btn-primary btn-lg">Primary</button>
 
 
     <script>
@@ -20,9 +20,11 @@
         sockjs.onopen    = function()  {console.log('[*] open', sockjs.protocol);};
         sockjs.onclose   = function()  {console.log('[*] close');};
 
-        var play = function() {
-            sockjs.send("PLAY");
-        }
+        $(document).ready(function(){
+			$("#btnTest").click(function(){
+				sockjs.send("TEST");
+			});
+		});
     </script>
 
 </body></html>
