@@ -1,30 +1,84 @@
-<!doctype html>
-<html><head>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<script data-main="www/libs/weioLibs" src="www/libs/require.js"></script>
 
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-
-    </head>
-
-    <body lang="en">
-    <h1>SockJS Echo example</h1>
-    <button id="btnTest" type="button" class="btn btn-primary btn-lg">Primary</button>
-
+  <head >
+    <title>My first Web app</title>
+    <style>
+        body {
+          background:black;
+        }
+        font {
+           font-family:Helvetica;
+           font-size:200px;
+           font-weight:bold;
+           text-transform:uppercase;
+        }
+        p {
+           cursor:pointer;
+           margin:0.2em;
+           line-height:1em;
+        }
+        
+        a {
+            color:red;
+            font-size:30px;
+        }
+        
+    </style>
 
     <script>
-        var sockjs_url = 'http://localhost:8081/test';       
-        var sockjs = new SockJS(sockjs_url);
+    function helloFromWeio(data) {
+        console.log("HELLO FROM WEIO :", data);
+        $("#numbers").empty();
+        $("#numbers").html(data.data);
+        
+    }
+    
+    var light = false;
+    
+    function onWeioReady() {
+        lights();
+        weioCallbacks.userMsg = helloFromWeio;
+    }
+    
+    function lights() {
 
-        sockjs.onopen    = function()  {console.log('[*] open', sockjs.protocol);};
-        sockjs.onclose   = function()  {console.log('[*] close');};
-
-        $(document).ready(function(){
-			$("#btnTest").click(function(){
-				sockjs.send("TEST");
-			});
-		});
+        if (light) {
+            
+            $("#phrase").html("Turn OFF the light!");
+            $("body").css("background","white");
+            $("#phrase").css("color","black");
+            digitalWrite(18, LOW);
+            digitalWrite(19, LOW);
+            digitalWrite(20, LOW);
+            genericMessage("webEvent", null);
+            light = !light;
+        } else {
+           
+            $("#phrase").html("Turn ON the light!");
+            $("body").css("background","black");
+            $("#phrase").css("color","white");
+            digitalWrite(18, HIGH);
+            digitalWrite(19, HIGH);
+            digitalWrite(20, HIGH);
+            genericMessage("webEvent", null);
+            light = !light;
+        }
+    }
+    
+    function readA(data){
+        console.log("laaaaa", data);
+    }
     </script>
+  </head>
 
-</body></html>
+  <body>
+
+    <font>
+        <a id="numbers"></a>
+        <p id="phrase" onclick="lights()"></p>
+    </font>
+
+  </body>
+</html>

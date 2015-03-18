@@ -1,0 +1,658 @@
+/* Import Twitter bootstrap
+ */
+@import "../bootstrap/css/bootstrap.css";
+@import "../jqtree/jqtree.css";
+
+/* Main color variables
+ */
+@leftSideBarColor: #383838; 
+@codingZoneColor: #D8D8D8;
+@rightSideBarColor: #FFFFFF;
+@textOnBrightSurface: #585858;
+
+/*
+ * left and right sidebar width when opened
+ * DON'T MODIFY these parameters thay are hard
+ * coded and hardcoded in editor.js file as well
+ */ 
+@leftSideBarWidth: 199px;
+@rightSideBarWidth: 495px; 
+
+/*
+ * Closed sidebar (left or right) width
+ * DON'T MODIFY these parameters thay are hard
+ * coded and hardcoded in editor.js file as well
+ */
+@closedSideBarWidth: 15px;
+
+body, div {
+    padding:0;
+    margin:0;
+    overflow:hidden;
+
+}
+
+
+/* 
+ * Editor CSS
+ */
+.columns {
+    position:relative;
+    width:100%;
+
+    .leftSideBar {
+        background-color: @leftSideBarColor;
+        width:@leftSideBarWidth;
+        position:fixed;
+        height:100%;
+        left:0;
+        top:0;
+        
+        #leftSideBarButton {
+            position: absolute;
+            color: #FFF;
+            opacity:0.5;
+            font-size: 14px;
+            width: 25px;
+            height: 25px;
+            padding: 6px;
+            background: transparent;
+            border: 0;
+            top: 50%;
+            left: (@leftSideBarWidth - 22px);
+            z-index:1000;
+            
+            &:hover {
+                opacity: 1;
+            };
+            
+        }
+        
+                     
+        
+        .bottomButtons {
+            width: 100%;
+            height: 32px;
+            background-color: rgba(0,0,0, 0.2);
+            position: absolute;
+            bottom: 0px;
+
+            button {
+                display: block;
+                float: left;
+                color:white;
+                padding: 6px;
+                background: transparent;
+                border:0;
+                font-size: 80%;
+                opacity: 0.2;
+                z-index:1000;
+                &:hover {
+                    opacity: 1;
+                };
+
+            }
+            
+            #updateFiles {
+                position: absolute;
+                margin-left: -25px;
+                width: 18px;
+                opacity: 0;
+            }
+            /*
+            
+            #searchInProject {
+                height: 18px;
+                width: 150px;
+                background: #494949;
+                border-color: transparent;
+                margin-top: -10px;
+                margin-left: 10px;
+                background: #2c2c2c;
+                border-radius:0px;
+                margin-bottom: -19px;
+                color:white;
+            }
+            
+            #searchInProject::-webkit-input-placeholder {
+                color: #696969;
+            }
+            
+            
+            #searchInProjectButton {
+                height: 24px;
+                background: transparent;
+                border: none;
+                -webkit-box-shadow: none;
+                -moz-box-shadow: none;
+                box-shadow: none;
+                i {
+                    position:absolute;
+                    color:white;
+                    margin-top:-17px;
+                    margin-left:156px;
+                    text-decoration:none;
+                    font-size:133%;
+                    opacity:0.4;
+                }
+            }
+
+            */
+            
+            
+            
+        }
+        
+        
+    }
+    
+    .editorContainer {
+        background-color: @codingZoneColor;
+        position:fixed;
+        left:@leftSideBarWidth;
+        right:@closedSideBarWidth;
+        height:100%;
+        background-image:url('../../img/watermark.png');
+        background-repeat:no-repeat;
+        background-attachment:fixed;
+        background-position:center; 
+       
+        
+        #errorAlert {
+            border-radius:0px;
+            position:relative;
+            margin-bottom: 0px;
+            
+            /* strip close button*/
+            #closeButton {
+                position: absolute;
+                top: 10px;
+                right: 23px;
+                opacity: 0.7;
+                cursor: pointer;
+                color:#585858;
+                text-decoration: none;
+                z-index:1000;
+                &:hover {
+                    opacity: 1; 
+                }   
+            }
+
+            
+        }
+        
+        
+        
+        /*
+         * ALL ACCORDIONS
+         */
+
+        .accordion-group {
+          background: white;
+          margin-bottom: 5px;
+          margin-top: 10px;
+          margin-left: 10px;
+          margin-right: 10px;
+          box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
+          border-color: rgb(218, 218, 218);
+          border-radius: 2px;
+
+        }
+        .accordion-heading {
+          display: block;
+          position: relative;
+          background:white;
+              a {
+                  font-weight: bold;
+                  color: @textOnBrightSurface;
+                  opacity: 0.7;
+                  cursor: pointer;
+                  text-decoration: none;
+                  &:hover {
+                      opacity: 1; 
+                  }
+              }
+          
+              /* strip close button*/
+              #closeButton {
+                  position: absolute;
+                  top: 9px;
+                  right: 15px;
+                  opacity: 0.7;
+                  cursor: pointer;
+                  text-decoration: none;
+                  z-index:1000;
+                  &:hover {
+                     opacity: 1; 
+                  }   
+              }
+          
+        }
+        .accordion-body.in.collapse {
+          min-height:85%;
+        }
+        
+        
+        
+        
+        .editor { 
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            height:100%;
+        }
+        
+    }
+    
+    .rightSideBar {
+        background-color: @rightSideBarColor;
+        width:@closedSideBarWidth;
+        position:fixed;
+        height:100%;
+        right:0;
+        top:0;
+        
+        #consoleTabs {
+            position:absolute;
+            background-color:#EAEAEA;
+            width:100%;
+            height:44px;
+    
+            #consoleTabsElements {
+                margin-top: 5px;
+            }
+        }
+        
+        .tab-content {
+            width:100%;
+            
+        }
+        
+        
+        
+        #consoleOutput {
+            display:block;
+            height:100%;
+            overflow:auto;
+            padding: 15px;
+            color:black;
+            text-decoration:none;
+            font-family:monospace;
+            font-size:12px;
+            line-height:16px;
+            margin-left:5px;
+            margin-top:19px;
+            
+            
+            #stderr {
+                color:#ff0000;
+                text-decoration:none;
+            }
+             
+            #sys {
+                color:#4ab5ce;
+                text-decoration:none;
+            }
+            
+        }
+
+        
+
+
+        /*
+         * BOARD IMAGE AND PINS BUTTONS 
+         */
+
+        #board-image {
+
+            margin: 34px 74px;
+        } 
+
+        // pin array position ( 1=left, 2=right ) //
+
+        ul#pinlist1 {
+            position: absolute;
+            left: 12px;
+            top: 95px;
+        }
+        
+        ul#pinlist1a {
+            position: absolute;
+            left: 12px;
+            top: 238px;
+        }
+
+        ul#pinlist2 {
+
+            position: absolute;
+            right: 35px;
+            top: 95px;
+        }
+        
+        ul#pinlist2a {
+
+            position: absolute;
+            right: 35px;
+            top: 238px;
+        }
+        
+        // general pin style //
+
+        li.pin, li.pin_on {
+            list-style: none;
+            margin: 2px;
+
+            a {
+                text-indent: -99999px;
+                display: block;
+                width: 34px;
+                height: 9px; 
+                border-radius: 10px;
+                cursor: pointer;
+            }
+
+        }
+
+        // inactive pin //
+
+        li.pin a {
+            
+                background-color: white;
+                border: 1px solid #CECECE;
+                
+                &:hover {
+                    background-color: #CECECE;
+                }
+
+                &:active {
+                    background-color: #4ab5ce;
+                    border-color: #4ab5ce;
+                }
+
+        }
+
+        // active pin //
+
+        li.pin_on a {
+            
+                background-color: #4ab5ce;
+                border: 1px solid #4ab5ce;
+                 &:hover {
+                    background-color: #CECECE;
+                    border: 1px solid #CECECE;
+                }
+                &:active {
+                    background-color: #4ab5ce;
+                    border-color: #4ab5ce;
+                }
+
+        }
+
+        /*
+         * END OF BOARD IMAGE AND PINS BUTTONS 
+         */
+        
+        
+        
+        
+        /*
+         * STATS DATAVIZ
+         */
+        
+        #stats-pane {
+            
+                padding:40px 20px !important;
+            
+        }
+        
+        #cpuStrip {
+            margin-bottom:20px !important;
+        }
+        
+        .statBigNumbers {
+            
+                font-size: 30px;
+                font-weight:bold;
+                text-decoration:none;
+                margin-bottom:5px;
+                margin-top:15px;
+        }
+        
+        
+        .statGreen  {
+            color:#B4F90B;
+            
+        }
+        
+        .statRed  {
+            color:#f85c32;
+            
+        }
+        
+        .statBlue  {
+            color:#3CDDF7;
+            
+        }
+        
+        .statBlack  {
+            color:#383838; 
+            
+        }
+        
+        
+        .statTitle {
+            
+            font-size: 14px;
+            color:#888;
+           
+        }
+        
+        .statMainTitle {
+            
+            font-size: 22px;
+            color:#888;
+            margin-bottom:5px;
+            margin-left:24px;
+            background-color:transparent;
+            
+        }
+        
+        
+        
+        .statChartViz {
+            /*position:relative;*/
+            /*margin-top:33px !important;*/
+            margin-left:-22px !important;
+            width:144px !important;
+            height:71px !important;
+            
+        }
+        
+        
+        /*
+         * END OF STATS DATAVIZ
+         */
+
+        #trashConsole {
+            display:none;
+            color:#222;
+            background: transparent;
+            border:0;
+            position: relative;
+            top: 55px;
+            right:13px;
+            float:right;
+            z-index:1000;
+            opacity:0.5;
+            &:hover {
+                opacity: 1; 
+            };
+
+        }
+        
+        #rightSideBarButton {
+            position:absolute;
+            color: #000;
+            opacity:0.5;
+            font-size: 14px;
+            width: 25px;
+            height: 25px;
+            padding: 6px;
+            background: transparent;
+            border: 0;
+            top: 50%;
+            right: (@closedSideBarWidth - 18px);
+            z-index:1000;
+            
+            &:hover {
+                opacity: 1;
+            };
+            
+        }
+        
+        
+        
+    }
+    
+}
+
+/*/// CONSOLE tabs*/
+
+.nav-pills > .active > a,
+.nav-pills > .active > a:hover,
+.nav-pills > .active > a:focus {
+    color: #383838;
+    font-weight: bold;
+    background-color: transparent;
+    border-bottom:solid 3px #757575;
+    border-radius:0px;
+    height:18px;
+    font-size:14px;
+
+}
+
+.nav-pills > li > a {
+    color:#757575;
+    font-size:15px;
+}
+
+.nav-tabs > li,
+.nav-pills > li {
+    margin: 0 15px;
+}
+
+/*////////////////////////////*/
+
+/* ALERTS CONSOLE */
+
+.alert {
+    margin-bottom:2px;   
+}
+
+
+
+#codeEditorAce {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display:none;
+}
+.accordion-inner {
+    min-height:400px;
+    box-sizing:border-box;
+}
+
+
+/* CSS Tree menu styles */
+
+/* FILES */
+
+ul.jqtree-tree .jqtree-title {
+    padding-left: 18px;
+    vertical-align: middle;
+    
+}
+li.jqtree_common {
+    background: url(../../img/document.png) 0 0 no-repeat;
+    margin-left: 0;
+}
+
+ul.jqtree-tree li.jqtree-folder {
+    padding-left: 9px;
+    background: url(../../img/folder-horizontal.png) 7px 4px no-repeat;
+}
+
+
+ul.jqtree-tree .jqtree-title {
+    /* TEXT COLOR */
+    color:rgb(200, 200, 200);
+    vertical-align: middle;
+}
+
+ul.jqtree-tree .jqtree-title:hover {
+     /* TEXT COLOR */
+     color:white;
+     vertical-align: middle;
+}
+
+ul.jqtree-tree .jqtree-toggler {
+    line-height: none;
+    top: 0%;
+    left: -0.8em;
+    line-height: 20px;
+    color:rgb(200, 200, 200);
+}
+
+ul.jqtree-tree .jqtree-toggler:hover {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+
+ul.jqtree-tree li.jqtree-selected > .jqtree-element,
+ul.jqtree-tree li.jqtree-selected > .jqtree-element:hover {
+    color:white;
+    background-color: none;
+    background: none;
+    text-shadow: none;
+}
+
+ol.tree
+{
+    padding: 8px 0;
+    width: 200px;
+    margin-left: 4px;
+    margin-top:0px;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+}
+
+li 
+{ 
+    position: relative; 
+    margin-left: 0px;
+    list-style: none;
+    
+    #deleteButton {
+        //display:none;
+        position:absolute;
+        margin-top:7px;
+        right:15px;
+        color: rgb(200,200,200);
+        //display:none;
+        /*display:none;*/
+        &:hover {
+            cursor:pointer;
+            color: white;
+            text-decoration: none;
+        };
+        
+    }    
+}
